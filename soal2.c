@@ -19,10 +19,11 @@ int main() {
     }
 
     // divide total sum by 3
-    int target = sum / 3;
-
+    float ftarget = (float)sum / 3.0;
+    int target;
+    if ((ftarget - (int)ftarget) >= 0.5) target = (int)(ftarget + 1);
+    else target = ftarget;
     int sum_arr[3];
-
 
     // check which index to split by comparing with target
     int temp_sum = 0;
@@ -61,6 +62,8 @@ int main() {
             }
             break;
         }
+        second_cut = first_cut + 1;
+        sum_arr[1] = num_arr[first_cut];
     }
 
     temp_sum = 0;
