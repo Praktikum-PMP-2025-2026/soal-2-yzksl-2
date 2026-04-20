@@ -91,6 +91,8 @@ int main() {
     if (sum_arr[0] <= sum_arr[1] && sum_arr[0] <= sum_arr[2]) min = sum_arr[0];
     else if (sum_arr[1] <= sum_arr[0] && sum_arr[1] <= sum_arr[2]) min = sum_arr[1];
     else min = sum_arr[2];
+    
+    if (second_cut == first_cut) second_cut += 1;
 
     printf("%d\nCUT %d %d\n", max-min, first_cut, second_cut);
 }
