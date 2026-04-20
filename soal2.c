@@ -33,7 +33,7 @@ int main() {
         if (temp_sum >= target) {
             int temp = temp_sum - num_arr[i] - target;
             if (temp < 0) temp = - temp;
-            if (temp <= temp_sum - target) {
+            if (temp < temp_sum - target) {
                 first_cut = i;   
                 sum_arr[0] = temp_sum - num_arr[i];
             } else {
@@ -50,7 +50,7 @@ int main() {
         if (temp_sum >= target) {
             int temp = temp_sum - num_arr[i] - target;
             if (temp < 0) temp = - temp;
-            if (temp <= temp_sum - target) {
+            if (temp < temp_sum - target) {
                 // printf("HERERE %d", temp);
                 second_cut = i;   
                 sum_arr[1] = temp_sum - num_arr[i];
@@ -75,7 +75,7 @@ int main() {
     else max = sum_arr[2];
 
     if (sum_arr[0] <= sum_arr[1] && sum_arr[0] <= sum_arr[2]) min = sum_arr[0];
-    else if (sum_arr[1] <= sum_arr[0] && sum_arr[1] <= sum_arr[2]) max = sum_arr[1];
+    else if (sum_arr[1] <= sum_arr[0] && sum_arr[1] <= sum_arr[2]) min = sum_arr[1];
     else min = sum_arr[2];
 
     printf("%d\nCUT %d %d\n", max-min, first_cut, second_cut);
