@@ -27,52 +27,63 @@ int main() {
 
     // check which index to split by comparing with target
     int temp_sum = 0;
-    int first_cut, second_cut;
+    int first_cut, second_cut, min, max;
     printf("MIN_DIFF ");
-    for (int i = 0; i < arr_size; i += 1) {
-        temp_sum += num_arr[i];
-        if (temp_sum >= target) {
-            int temp = temp_sum - num_arr[i] - target;
-            if (temp < 0) temp = - temp;
-            if (temp < temp_sum - target) {
-                first_cut = i;   
-                sum_arr[0] = temp_sum - num_arr[i];
-            } else {
-                first_cut = i + 1;
-                sum_arr[0] = temp_sum;
+    if (arr_size == 3) {
+        first_cut = 1;
+        second_cut = 2;
+        sum_arr[0] = num_arr[0];
+        sum_arr[1] = num_arr[1];
+        sum_arr[2] = num_arr[2];
+    }
+
+    else {
+
+        for (int i = 0; i < arr_size; i += 1) {
+            temp_sum += num_arr[i];
+            if (temp_sum >= target) {
+                int temp = temp_sum - num_arr[i] - target;
+                if (temp < 0) temp = - temp;
+                if (temp < temp_sum - target) {
+                    first_cut = i;   
+                    sum_arr[0] = temp_sum - num_arr[i];
+                } else {
+                    first_cut = i + 1;
+                    sum_arr[0] = temp_sum;
+                }
+                break;
             }
-            break;
         }
-    }
-
-    temp_sum = 0;
-    for (int i = first_cut; i < arr_size; i += 1) {
-        temp_sum += num_arr[i];
-        if (temp_sum >= target) {
-            int temp = temp_sum - num_arr[i] - target;
-            if (temp < 0) temp = - temp;
-            if (temp < temp_sum - target) {
-                // printf("HERERE %d", temp);
-                second_cut = i;   
-                sum_arr[1] = temp_sum - num_arr[i];
-            } else {
-                second_cut = i + 1;
-                sum_arr[1] = temp_sum;
-                // printf("JDSFLDSF%d %d df %d heli", second_cut, temp_sum, target);
+    
+        temp_sum = 0;
+        for (int i = first_cut; i < arr_size; i += 1) {
+            temp_sum += num_arr[i];
+            if (temp_sum >= target) {
+                int temp = temp_sum - num_arr[i] - target;
+                if (temp < 0) temp = - temp;
+                if (temp < temp_sum - target) {
+                    // printf("HERERE %d", temp);
+                    second_cut = i;   
+                    sum_arr[1] = temp_sum - num_arr[i];
+                } else {
+                    second_cut = i + 1;
+                    sum_arr[1] = temp_sum;
+                    // printf("JDSFLDSF%d %d df %d heli", second_cut, temp_sum, target);
+                }
+                break;
             }
-            break;
+            second_cut = first_cut + 1;
+            sum_arr[1] = num_arr[first_cut];
         }
-        second_cut = first_cut + 1;
-        sum_arr[1] = num_arr[first_cut];
+    
+        temp_sum = 0;
+        for (int i = second_cut; i < arr_size; i += 1) {
+            temp_sum += num_arr[i];
+        }
+        sum_arr[2] = temp_sum;
+    
+       
     }
-
-    temp_sum = 0;
-    for (int i = second_cut; i < arr_size; i += 1) {
-        temp_sum += num_arr[i];
-    }
-    sum_arr[2] = temp_sum;
-
-    int max, min;
     if (sum_arr[0] >= sum_arr[1] && sum_arr[0] >= sum_arr[2]) max = sum_arr[0];
     else if (sum_arr[1] >= sum_arr[0] && sum_arr[1] >= sum_arr[2]) max = sum_arr[1];
     else max = sum_arr[2];
